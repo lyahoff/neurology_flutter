@@ -92,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
             InkWell(
-              child: customCard('Индекс Альгвера', 'assets/algover.png'),
+              child: customCard('Индекс Альговера', 'assets/algover.png'),
               onTap: () {
                 runApp(const AlgoverScreen());
               },

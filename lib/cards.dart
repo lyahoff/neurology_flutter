@@ -18,3 +18,10 @@ Widget customCard(String title, String img) {
         ],
       ));
 }
+
+Widget appBarText(String title) {
+  return Text(
+    title,
+    style: const TextStyle(color: Colors.black),
+  );
+}
