@@ -4,30 +4,30 @@ import 'package:neurology_flutter/main.dart';
 
 import '../insult.dart';
 
-class NIHSSScreen extends StatefulWidget {
-  const NIHSSScreen({Key? key}) : super(key: key);
+class RTpaScreen extends StatefulWidget {
+  const RTpaScreen({Key? key}) : super(key: key);
 
   @override
-  State<NIHSSScreen> createState() => _NIHSSScreenState();
+  State<RTpaScreen> createState() => _RTpaScreenState();
 }
 
-class _NIHSSScreenState extends State<NIHSSScreen> {
+class _RTpaScreenState extends State<RTpaScreen> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: NIHSSLogic(),
+      home: RTpaLogic(),
     );
   }
 }
 
-class NIHSSLogic extends StatefulWidget {
-  const NIHSSLogic({Key? key}) : super(key: key);
+class RTpaLogic extends StatefulWidget {
+  const RTpaLogic({Key? key}) : super(key: key);
 
   @override
-  State<NIHSSLogic> createState() => _NIHSSLogicState();
+  State<RTpaLogic> createState() => _RTpaLogicState();
 }
 
-class _NIHSSLogicState extends State<NIHSSLogic> {
+class _RTpaLogicState extends State<RTpaLogic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class _NIHSSLogicState extends State<NIHSSLogic> {
             runApp(const InsultScreen());
           },
         ),
-        title: appBarText('NIHSS'),
+        title: appBarText('rt-PA'),
         centerTitle: true,
       ),
     );

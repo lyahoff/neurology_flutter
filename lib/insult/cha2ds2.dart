@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 import 'package:neurology_flutter/main.dart';
 
+import '../insult.dart';
+
 class CHA2Screen extends StatefulWidget {
   const CHA2Screen({Key? key}) : super(key: key);
 
@@ -39,7 +41,7 @@ class _CHA2LogicState extends State<CHA2Logic> {
             color: Colors.black,
           ),
           onPressed: () {
-            runApp(const MainScreen());
+            runApp(const InsultScreen());
           },
         ),
         title: appBarText('CHA2DS2-VASC'),

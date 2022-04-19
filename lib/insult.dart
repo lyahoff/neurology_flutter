@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
+import 'package:neurology_flutter/insult/abcd2.dart';
 import 'package:neurology_flutter/insult/cha2ds2.dart';
+import 'package:neurology_flutter/insult/hasbled.dart';
 import 'package:neurology_flutter/insult/nihss.dart';
+import 'package:neurology_flutter/insult/renkin.dart';
+import 'package:neurology_flutter/insult/rtpa.dart';
 import 'package:neurology_flutter/main.dart';
 
 class InsultScreen extends StatefulWidget {
@@ -52,12 +56,29 @@ class _InsultScreenState extends State<InsultScreen> {
                   'Шкала CHA2DS2-VASC\nоценки риска инсульта и системной тромбоэмболии у пациентов с фибрилляцией предсердий',
                   'assets/cha2.png'),
             ),
-            customCard(
-                'Шкала HAS-BLED \nоценки риска кровотечений при мерцательной аритмии',
-                'assets/has.png'),
-            customCard('Шкала ABCD2', 'assets/abcd.png'),
-            customCard('Расчет дозы rt-PA', 'assets/rt.png'),
-            customCard('Шкала Рэнкина', 'assets/renkin.png'),
+            InkWell(
+              onTap: () {
+                runApp(const HASBLEDScreen());
+              },
+              child: customCard(
+                  'Шкала HAS-BLED \nоценки риска кровотечений при мерцательной аритмии',
+                  'assets/has.png'),
+            ),
+            InkWell(
+                onTap: () {
+                  runApp(const ABSD2Screen());
+                },
+                child: customCard('Шкала ABCD2', 'assets/abcd.png')),
+            InkWell(
+                onTap: () {
+                  runApp(const RTpaScreen());
+                },
+                child: customCard('Расчет дозы rt-PA', 'assets/rt.png')),
+            InkWell(
+                onTap: () {
+                  runApp(const RenkinScreen());
+                },
+                child: customCard('Шкала Рэнкина', 'assets/renkin.png')),
           ],
         ),
       ),

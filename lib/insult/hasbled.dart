@@ -4,30 +4,30 @@ import 'package:neurology_flutter/main.dart';
 
 import '../insult.dart';
 
-class NIHSSScreen extends StatefulWidget {
-  const NIHSSScreen({Key? key}) : super(key: key);
+class HASBLEDScreen extends StatefulWidget {
+  const HASBLEDScreen({Key? key}) : super(key: key);
 
   @override
-  State<NIHSSScreen> createState() => _NIHSSScreenState();
+  State<HASBLEDScreen> createState() => _HASBLEDScreenState();
 }
 
-class _NIHSSScreenState extends State<NIHSSScreen> {
+class _HASBLEDScreenState extends State<HASBLEDScreen> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: NIHSSLogic(),
+      home: HASBLEDLogic(),
     );
   }
 }
 
-class NIHSSLogic extends StatefulWidget {
-  const NIHSSLogic({Key? key}) : super(key: key);
+class HASBLEDLogic extends StatefulWidget {
+  const HASBLEDLogic({Key? key}) : super(key: key);
 
   @override
-  State<NIHSSLogic> createState() => _NIHSSLogicState();
+  State<HASBLEDLogic> createState() => _HASBLEDLogicState();
 }
 
-class _NIHSSLogicState extends State<NIHSSLogic> {
+class _HASBLEDLogicState extends State<HASBLEDLogic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class _NIHSSLogicState extends State<NIHSSLogic> {
             runApp(const InsultScreen());
           },
         ),
-        title: appBarText('NIHSS'),
+        title: appBarText('HAS-BLED'),
         centerTitle: true,
       ),
     );
