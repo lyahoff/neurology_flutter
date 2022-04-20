@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:neurology_flutter/intracranial/functionality.dart';
+import 'package:neurology_flutter/intracranial/volume.dart';
 import 'cards.dart';
 import 'main.dart';
 
@@ -34,11 +36,21 @@ class _IntracranialScreenState extends State<IntracranialScreen> {
         body: ListView(
           padding: const EdgeInsets.all(10.0),
           children: [
-            customCard(
-                'Оценка функциональной самостоятельности после внутричерепного кровоизлияния',
-                'assets/function.png'),
-            customCard('Расчет объема внутричерепного кровоизлияния',
-                'assets/volume.png'),
+            InkWell(
+              onTap: () {
+                runApp(const FunctionalityScreen());
+              },
+              child: customCard(
+                  'Оценка функциональной самостоятельности после внутричерепного кровоизлияния',
+                  'assets/function.png'),
+            ),
+            InkWell(
+              onTap: () {
+                runApp(const VulumeScreen());
+              },
+              child: customCard('Расчет объема внутричерепного кровоизлияния',
+                  'assets/volume.png'),
+            ),
           ],
         ),
       ),

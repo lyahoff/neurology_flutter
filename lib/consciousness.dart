@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:neurology_flutter/consciousness/four.dart';
+import 'package:neurology_flutter/consciousness/glazgo.dart';
+import 'package:neurology_flutter/consciousness/glazgo_child.dart';
+import 'package:neurology_flutter/consciousness/richmond.dart';
 
 import 'cards.dart';
 import 'main.dart';
@@ -35,11 +39,29 @@ class _ConsciousnessScreenState extends State<ConsciousnessScreen> {
         body: ListView(
           padding: const EdgeInsets.all(10.0),
           children: [
-            customCard('Шкала комы Глазго', 'assets/glazgo.png'),
-            customCard('Детская шкала комы Глазго', 'assets/glazgo.png'),
-            customCard('Шкала комы FOUR', 'assets/glazgo.png'),
-            customCard(
-                'Шкала возбуждения-седации Ричмонда', 'assets/glazgo.png'),
+            InkWell(
+                onTap: () {
+                  runApp(const GlazgoScreen());
+                },
+                child: customCard('Шкала комы Глазго', 'assets/glazgo.png')),
+            InkWell(
+                onTap: () {
+                  runApp(const GlazgoChildrenScreen());
+                },
+                child: customCard(
+                    'Детская шкала комы Глазго', 'assets/glazgo.png')),
+            InkWell(
+                onTap: () {
+                  runApp(const FOURScreen());
+                },
+                child: customCard('Шкала комы FOUR', 'assets/glazgo.png')),
+            InkWell(
+              onTap: () {
+                runApp(const RichmindScreen());
+              },
+              child: customCard(
+                  'Шкала возбуждения-седации Ричмонда', 'assets/glazgo.png'),
+            ),
           ],
         ),
       ),
