@@ -30,22 +30,28 @@ class CHA2Logic extends StatefulWidget {
 class _CHA2LogicState extends State<CHA2Logic> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        runApp(const InsultScreen());
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              runApp(const InsultScreen());
+            },
           ),
-          onPressed: () {
-            runApp(const InsultScreen());
-          },
+          title: appBarText('CHA2DS2-VASC'),
+          centerTitle: true,
         ),
-        title: appBarText('CHA2DS2-VASC'),
-        centerTitle: true,
       ),
     );
   }

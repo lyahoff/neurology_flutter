@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
-import 'package:neurology_flutter/main.dart';
-
 import '../insult.dart';
 
 class ABSD2Screen extends StatefulWidget {
@@ -30,22 +28,28 @@ class ABCD2Logic extends StatefulWidget {
 class _ABCD2LogicState extends State<ABCD2Logic> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        runApp(const InsultScreen());
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              runApp(const InsultScreen());
+            },
           ),
-          onPressed: () {
-            runApp(const InsultScreen());
-          },
+          title: appBarText('ABCD2'),
+          centerTitle: true,
         ),
-        title: appBarText('ABCD2'),
-        centerTitle: true,
       ),
     );
   }

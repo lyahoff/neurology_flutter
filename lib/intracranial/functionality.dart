@@ -28,22 +28,28 @@ class _FunctionalityLogicState extends State<FunctionalityLogic> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              runApp(const IntracranialScreen());
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
+      home: WillPopScope(
+        onWillPop: () async {
+          runApp(const IntracranialScreen());
+          return false;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                runApp(const IntracranialScreen());
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
             ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text(
-            'Оценка функциональной самостоятельности после внутричерепного кровоизлияния',
-            style: TextStyle(color: Colors.black),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text(
+              'Оценка функциональной самостоятельности после внутричерепного кровоизлияния',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
       ),

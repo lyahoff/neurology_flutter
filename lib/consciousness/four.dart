@@ -28,22 +28,28 @@ class _FOURLogicState extends State<FOURLogic> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              runApp(const ConsciousnessScreen());
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
+      home: WillPopScope(
+        onWillPop: () async {
+          runApp(const ConsciousnessScreen());
+          return false;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                runApp(const ConsciousnessScreen());
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
             ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text(
-            'Шкала комы FOUR',
-            style: TextStyle(color: Colors.black),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: const Text(
+              'Шкала комы FOUR',
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
       ),

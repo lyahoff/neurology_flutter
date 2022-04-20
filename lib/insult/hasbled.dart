@@ -30,22 +30,28 @@ class HASBLEDLogic extends StatefulWidget {
 class _HASBLEDLogicState extends State<HASBLEDLogic> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        runApp(const InsultScreen());
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              runApp(const InsultScreen());
+            },
           ),
-          onPressed: () {
-            runApp(const InsultScreen());
-          },
+          title: appBarText('HAS-BLED'),
+          centerTitle: true,
         ),
-        title: appBarText('HAS-BLED'),
-        centerTitle: true,
       ),
     );
   }
