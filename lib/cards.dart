@@ -25,3 +25,19 @@ Widget appBarText(String title) {
     style: const TextStyle(color: Colors.black),
   );
 }
+
+Widget h1Text(String title) {
+  return Text(
+    title,
+    style: const TextStyle(
+        color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+  );
+}
+
+Widget h2Text(String title) {
+  return Text(
+    title,
+    style: const TextStyle(
+        color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+  );
+}

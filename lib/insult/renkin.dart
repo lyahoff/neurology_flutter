@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
-import 'package:neurology_flutter/main.dart';
 
 import '../insult.dart';
 

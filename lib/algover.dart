@@ -15,7 +15,7 @@ class _AlgoverScreenState extends State<AlgoverScreen> {
     return MaterialApp(
       home: WillPopScope(
         onWillPop: () async {
-          runApp(MainScreen());
+          runApp(const MainScreen());
           return false;
         },
         child: Scaffold(
