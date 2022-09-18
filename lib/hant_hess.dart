@@ -64,6 +64,7 @@ class _HantLogicState extends State<HantLogic> {
       padding: const EdgeInsets.all(10),
       children: [
         Card(
+          color: Colors.grey[200],
           elevation: 2,
           child: ListTile(
               title: h1Text(
