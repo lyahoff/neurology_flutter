@@ -151,7 +151,7 @@ Widget result(double a, double b) {
     algoverResult =
         'Результат составляет $toLow, что соответствует шоку II степени. Потеря ОЦК 20-40%';
   }
-  if (result >= 1.3) {
+  if (result >= 1.2) {
     algoverResult =
         'Результат составляет $toLow, что соответствует шоку III степени. Потеря ОЦК более 40%';
   }
