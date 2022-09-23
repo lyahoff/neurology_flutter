@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 
@@ -39,7 +37,7 @@ class _AlgoverScreenState extends State<AlgoverScreen> {
               style: TextStyle(color: Colors.black),
             ),
           ),
-          body: AlgoverLogic(),
+          body: const AlgoverLogic(),
         ),
       ),
     );
@@ -54,6 +52,10 @@ class AlgoverLogic extends StatefulWidget {
 }
 
 class _AlgoverLogicState extends State<AlgoverLogic> {
+  String hrText = '0.0';
+  String adText = '0.0';
+  double hr = 0.0;
+  double ad = 0.0;
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -78,58 +80,50 @@ class _AlgoverLogicState extends State<AlgoverLogic> {
                 ),
               ],
             )),
-        SizedBox(
-          height: 10,
+        Card(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextField(
+                  keyboardType: TextInputType.number,
+                  maxLength: 3,
+                  decoration: const InputDecoration(
+                      hintText: 'Введите значение ЧСС',
+                      border: OutlineInputBorder()),
+                  onChanged: (text) => setState(() {
+                    hrText = text;
+                    if (hrText.isEmpty) {
+                      hrText = '0.0';
+                    }
+                    hr = double.parse(hrText);
+                  }),
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  maxLength: 3,
+                  decoration: const InputDecoration(
+                      hintText: 'Введите значение САД',
+                      border: OutlineInputBorder()),
+                  onChanged: (text) => setState(() {
+                    adText = text;
+                    if (adText.isEmpty) {
+                      adText = '0.0';
+                    }
+                    ad = double.parse(adText);
+                  }),
+                ),
+              ],
+            ),
+          ),
         ),
-        Card(elevation: 2, child: AlgoverResult()),
-      ],
-    );
-  }
-}
-
-class AlgoverResult extends StatefulWidget {
-  const AlgoverResult({Key? key}) : super(key: key);
-
-  @override
-  State<AlgoverResult> createState() => _AlgoverResultState();
-}
-
-class _AlgoverResultState extends State<AlgoverResult> {
-  String hrText = '0.0';
-  String adText = '0.0';
-  double hr = 0.0;
-  double ad = 0.0;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          keyboardType: TextInputType.number,
-          maxLength: 3,
-          decoration: InputDecoration(hintText: 'Введите значение ЧСС'),
-          onChanged: (text) => setState(() {
-            hrText = text;
-            if (hrText.isEmpty) {
-              hrText = '0.0';
-            }
-            hr = double.parse(hrText);
-          }),
-        ),
-        TextField(
-          keyboardType: TextInputType.number,
-          maxLength: 3,
-          decoration: InputDecoration(hintText: 'Введите значение САД'),
-          onChanged: (text) => setState(() {
-            adText = text;
-            if (adText.isEmpty) {
-              adText = '0.0';
-            }
-            ad = double.parse(adText);
-          }),
-        ),
-        ListTile(
-          title: result(hr, ad),
-        )
+        Card(
+            color: Colors.amber,
+            elevation: 2,
+            child: ListTile(
+              title: result(hr, ad),
+            )),
       ],
     );
   }
