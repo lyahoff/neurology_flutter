@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neurology_flutter/cards.dart';
 
 import 'main.dart';
 
@@ -36,8 +37,34 @@ class _EpworthScreenState extends State<EpworthScreen> {
               style: TextStyle(color: Colors.black),
             ),
           ),
+          body: EpworthLogic(),
         ),
       ),
+    );
+  }
+}
+
+class EpworthLogic extends StatefulWidget {
+  const EpworthLogic({Key? key}) : super(key: key);
+
+  @override
+  State<EpworthLogic> createState() => _EpworthLogicState();
+}
+
+class _EpworthLogicState extends State<EpworthLogic> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(10),
+      children: [
+        Card(
+            elevation: 2,
+            color: Colors.grey[200],
+            child: ListTile(
+              title: h1Text(
+                  '''Шкала сонливости Эпворта - это анкетный опрос, составленный специально для оценки сонливости и вероятности наличия нарколепсии. Все, что от Вас требуется - ответить на несколько вопросов касательно вероятности заснуть в описанных ситуациях. По завершению тестирования Вам будет выдан результат с расшифровкой и рекомендациями.'''),
+            ))
+      ],
     );
   }
 }

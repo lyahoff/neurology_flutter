@@ -143,5 +143,9 @@ Widget ideal(int radio, int indexHeight, String result) {
         'Идеальная масса тела по методу Devine = $devineToLow\n\nИдеальная масса тела по методу Robinson = $robinsonToLow';
   }
 
+  if (indexHeight < 91 || indexHeight > 228) {
+    result = 'Рост должен быть в пределах от 91 до 228 см';
+  }
+
   return h2Text(result);
 }
