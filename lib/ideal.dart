@@ -54,7 +54,7 @@ class IdealBodyLogic extends StatefulWidget {
 class _IdealBodyLogicState extends State<IdealBodyLogic> {
   int radio = 1;
   String height = '';
-  int indexHeight = 0;
+  double indexHeight = 0;
   String result = '';
   @override
   Widget build(BuildContext context) {
@@ -100,10 +100,10 @@ class _IdealBodyLogicState extends State<IdealBodyLogic> {
                       hintText: 'Рост в см', border: OutlineInputBorder()),
                   onChanged: (text) => setState(() {
                     height = text;
-                    indexHeight = int.parse(height);
                     if (height.isEmpty) {
-                      result = '0';
+                      height = '0.0';
                     }
+                    indexHeight = double.parse(height);
                   }),
                 ),
               ),
@@ -121,7 +121,7 @@ class _IdealBodyLogicState extends State<IdealBodyLogic> {
   }
 }
 
-Widget ideal(int radio, int indexHeight, String result) {
+Widget ideal(int radio, double indexHeight, String result) {
   var devine = 0.0;
   var robinson = 0.0;
 
