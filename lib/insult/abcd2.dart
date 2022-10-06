@@ -72,7 +72,7 @@ class _ABCD2State extends State<ABCD2> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       children: [
         Card(
             elevation: 2,
@@ -226,7 +226,7 @@ Widget abcdResult(int age, int ag, int ks, int ds, int sd) {
   String result = '';
   if (total <= 3) {
     result =
-        'Результат $total баллов\n\nНизкий риск инсульта.\n\nРиск инсульта в течение 2 дней: 1.0%.\n\Риск инсульта в течение 1 недели: 1.2%.\nРиск инсульта в течение 3 месяцев: 3.1%';
+        'Результат $total баллов\n\nНизкий риск инсульта.\n\nРиск инсульта в течение 2 дней: 1.0%.\n\nРиск инсульта в течение 1 недели: 1.2%.\nРиск инсульта в течение 3 месяцев: 3.1%';
   }
   if (total >= 4 && total <= 5) {
     result =
