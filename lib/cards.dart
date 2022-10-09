@@ -42,4 +42,4 @@ Widget h2Text(String title) {
   );
 }
 
-String adMob = 'ca-app-pub-3940256099942544/6300978111';
+String adMob = 'ca-app-pub-5645343935667918/8274284370';

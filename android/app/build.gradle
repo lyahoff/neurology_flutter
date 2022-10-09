@@ -43,11 +43,11 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.neuroapp.calc.neurology_flutter"
+        applicationId "com.neuroapp.calc"
         minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 3
+        versionName "1.2.0"
         multiDexEnabled true
     }
 
