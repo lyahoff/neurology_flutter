@@ -46,8 +46,8 @@ android {
         applicationId "com.neuroapp.calc"
         minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 3
-        versionName "1.2.0"
+        versionCode 4
+        versionName "1.2.1"
         multiDexEnabled true
     }
 
