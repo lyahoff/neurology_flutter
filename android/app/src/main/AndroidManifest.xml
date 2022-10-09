@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.neuroapp.calc.neurology_flutter">
+    package="com.neuroapp.calc">
    <application
         android:label="Калькулятор невропатолога"
         android:name="${applicationName}"
