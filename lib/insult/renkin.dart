@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 
 import '../insult.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class RenkinScreen extends StatefulWidget {
   const RenkinScreen({Key? key}) : super(key: key);
@@ -27,6 +28,34 @@ class RTpaLogic extends StatefulWidget {
 }
 
 class _RTpaLogicState extends State<RTpaLogic> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -52,6 +81,15 @@ class _RTpaLogicState extends State<RTpaLogic> {
           centerTitle: true,
         ),
         body: const RankinLogic(),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 50,
+            color: Colors.white,
+            child: AdWidget(
+              ad: bannerAd!,
+            ),
+          ),
+        ),
       ),
     );
   }

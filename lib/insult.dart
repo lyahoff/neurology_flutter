@@ -8,6 +8,8 @@ import 'package:neurology_flutter/insult/renkin.dart';
 import 'package:neurology_flutter/insult/rtpa.dart';
 import 'package:neurology_flutter/main.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 class InsultScreen extends StatefulWidget {
   const InsultScreen({Key? key}) : super(key: key);
 
@@ -16,6 +18,34 @@ class InsultScreen extends StatefulWidget {
 }
 
 class _InsultScreenState extends State<InsultScreen> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,6 +115,15 @@ class _InsultScreenState extends State<InsultScreen> {
                   },
                   child: customCard('Шкала Рэнкина', 'assets/renkin.png')),
             ],
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              color: Colors.white,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            ),
           ),
         ),
       ),

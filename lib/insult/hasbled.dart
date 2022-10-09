@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 
 import '../insult.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HASBLEDScreen extends StatefulWidget {
   const HASBLEDScreen({Key? key}) : super(key: key);
@@ -27,6 +28,34 @@ class HASBLEDLogic extends StatefulWidget {
 }
 
 class _HASBLEDLogicState extends State<HASBLEDLogic> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -52,6 +81,15 @@ class _HASBLEDLogicState extends State<HASBLEDLogic> {
           centerTitle: true,
         ),
         body: const HasLogic(),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 50,
+            color: Colors.white,
+            child: AdWidget(
+              ad: bannerAd!,
+            ),
+          ),
+        ),
       ),
     );
   }

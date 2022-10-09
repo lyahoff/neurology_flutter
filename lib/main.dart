@@ -10,8 +10,11 @@ import 'package:neurology_flutter/midas.dart';
 import 'package:neurology_flutter/skf.dart';
 import 'cards.dart';
 import 'insult.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MobileAds.instance.initialize();
   runApp(const MainScreen());
 }
 
@@ -22,6 +25,34 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -116,6 +147,9 @@ class _MainScreenState extends State<MainScreen> {
           child: Container(
             height: 50,
             color: Colors.white,
+            child: AdWidget(
+              ad: bannerAd!,
+            ),
           ),
         ),
       ),

@@ -41,3 +41,5 @@ Widget h2Text(String title) {
         color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
   );
 }
+
+String adMob = 'ca-app-pub-3940256099942544/6300978111';

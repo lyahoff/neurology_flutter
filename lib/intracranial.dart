@@ -4,6 +4,8 @@ import 'package:neurology_flutter/intracranial/volume.dart';
 import 'cards.dart';
 import 'main.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 class IntracranialScreen extends StatefulWidget {
   const IntracranialScreen({Key? key}) : super(key: key);
 
@@ -12,6 +14,34 @@ class IntracranialScreen extends StatefulWidget {
 }
 
 class _IntracranialScreenState extends State<IntracranialScreen> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,6 +87,15 @@ class _IntracranialScreenState extends State<IntracranialScreen> {
                     'assets/volume.png'),
               ),
             ],
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              color: Colors.white,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            ),
           ),
         ),
       ),

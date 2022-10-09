@@ -3,6 +3,8 @@ import 'package:neurology_flutter/cards.dart';
 
 import '../insult.dart';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 class CHA2Screen extends StatefulWidget {
   const CHA2Screen({Key? key}) : super(key: key);
 
@@ -27,6 +29,34 @@ class CHA2Logic extends StatefulWidget {
 }
 
 class _CHA2LogicState extends State<CHA2Logic> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -52,6 +82,15 @@ class _CHA2LogicState extends State<CHA2Logic> {
           centerTitle: true,
         ),
         body: const ChaLogic(),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 50,
+            color: Colors.white,
+            child: AdWidget(
+              ad: bannerAd!,
+            ),
+          ),
+        ),
       ),
     );
   }

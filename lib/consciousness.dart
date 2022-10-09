@@ -6,6 +6,7 @@ import 'package:neurology_flutter/consciousness/richmond.dart';
 
 import 'cards.dart';
 import 'main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ConsciousnessScreen extends StatefulWidget {
   const ConsciousnessScreen({Key? key}) : super(key: key);
@@ -15,6 +16,34 @@ class ConsciousnessScreen extends StatefulWidget {
 }
 
 class _ConsciousnessScreenState extends State<ConsciousnessScreen> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,6 +97,15 @@ class _ConsciousnessScreenState extends State<ConsciousnessScreen> {
                     'Шкала возбуждения-седации Ричмонда', 'assets/glazgo.png'),
               ),
             ],
+          ),
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              color: Colors.white,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            ),
           ),
         ),
       ),

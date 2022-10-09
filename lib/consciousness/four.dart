@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 import '../consciousness.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class FOURScreen extends StatefulWidget {
   const FOURScreen({Key? key}) : super(key: key);
@@ -10,6 +11,34 @@ class FOURScreen extends StatefulWidget {
 }
 
 class _FOURScreenState extends State<FOURScreen> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +66,15 @@ class _FOURScreenState extends State<FOURScreen> {
             ),
           ),
           body: const FourLogic(),
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              color: Colors.white,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            ),
+          ),
         ),
       ),
     );

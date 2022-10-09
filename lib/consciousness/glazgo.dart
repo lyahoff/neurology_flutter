@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neurology_flutter/cards.dart';
 import '../consciousness.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class GlazgoScreen extends StatefulWidget {
   const GlazgoScreen({Key? key}) : super(key: key);
@@ -26,6 +27,34 @@ class GlazgoLogic extends StatefulWidget {
 }
 
 class _GlazgoLogicState extends State<GlazgoLogic> {
+  AdRequest? adRequest;
+  BannerAd? bannerAd;
+  @override
+  void initState() {
+    super.initState();
+    adRequest = const AdRequest(
+      nonPersonalizedAds: false,
+    );
+
+    BannerAdListener bannerAdListener = BannerAdListener(
+        onAdClosed: ((ad) {
+          bannerAd!.load();
+        }),
+        onAdFailedToLoad: (ad, error) => {bannerAd!.load()});
+    bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: adMob,
+        listener: bannerAdListener,
+        request: adRequest!);
+    bannerAd!.load();
+  }
+
+  @override
+  void dispose() {
+    bannerAd!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,6 +82,15 @@ class _GlazgoLogicState extends State<GlazgoLogic> {
             ),
           ),
           body: const Glazgo(),
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              color: Colors.white,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            ),
+          ),
         ),
       ),
     );
